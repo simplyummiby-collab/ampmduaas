@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Duaa Reader</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app">
+    <section id="home" class="screen active">
+      <div class="home-card glass">
+        <p class="eyebrow">✨ Simply Ummiby</p>
+        <h1>🤲 Duaa Reader</h1>
+        <p class="lead">A calm, beautiful place to read morning and evening adhkar one card at a time.</p>
+
+        <div class="merit-box">
+          <h2>🌿 The beauty of duaa</h2>
+          <p>Keep your tongue moist with remembrance of Allah, and come back to these supplications one card at a time.</p>
+        </div>
+
+        <div class="button-stack">
+          <button class="primary" data-start="Morning">🌅 Morning Adhkar</button>
+          <button class="primary evening" data-start="Evening">🌙 Evening Adhkar</button>
+        </div>
+
+        <p class="tiny">First version: swipe reader only. Tracking can come later, in shaa Allah.</p>
+      </div>
+    </section>
+
+    <section id="intro" class="screen">
+      <div class="topbar">
+        <button class="text-btn" data-home>🏠 Home</button>
+      </div>
+      <div class="intro-card glass">
+        <p class="eyebrow" id="intro-eyebrow">Morning</p>
+        <h1 id="intro-title">Morning Adhkar</h1>
+        <p id="intro-text" class="lead"></p>
+        <button class="primary" id="beginBtn">✨ Begin</button>
+      </div>
+    </section>
+
+    <section id="reader" class="screen">
+      <div class="reader-shell">
+        <div class="topbar reader-topbar glass">
+          <button class="text-btn" data-home>🏠 Home</button>
+          <div class="top-actions">
+            <button class="icon-btn top-arrow" id="topPrevBtn" aria-label="Previous duaa">←</button>
+            <div class="progress-stack" aria-label="Reading progress">
+              <div class="progress-pill"><span id="currentIndex">1</span> / <span id="totalCount">1</span></div>
+              <div class="progress-track"><span id="progressFill"></span></div>
+            </div>
+            <button class="icon-btn top-arrow" id="topNextBtn" aria-label="Next duaa">→</button>
+          </div>
+        </div>
+
+        <button class="side-arrow side-prev" id="sidePrevBtn" aria-label="Previous duaa">‹</button>
+        <button class="side-arrow side-next" id="sideNextBtn" aria-label="Next duaa">›</button>
+
+        <article id="card" class="duaa-card glass">
+          <div class="card-header">
+            <div class="title-block">
+              <p id="cardTime" class="eyebrow">Morning</p>
+              <h2 id="cardTitle">Duaa</h2>
+              <p id="cardSummary" class="card-summary"></p>
+              <p id="cardSubtitle" class="card-subtitle"></p>
+            </div>
+            <div id="countBadge" class="count-badge">🔁 Number of times: 1x</div>
+          </div>
+
+          <div class="card-content">
+            <section class="arabic-wrap">
+              <p id="arabicText" class="arabic"></p>
+            </section>
+
+            <section id="transliterationWrap" class="transliteration-wrap" hidden>
+              <h3>🔤 Transliteration</h3>
+              <p id="transliterationText"></p>
+            </section>
+
+            <section class="english-wrap">
+              <h3>🌼 Meaning</h3>
+              <p id="englishText"></p>
+            </section>
+
+            <section id="virtueBox" class="virtue-box">
+              <h3>🌿 Virtue / note</h3>
+              <p id="virtueText"></p>
+            </section>
+          </div>
+        </article>
+
+        <article id="endCard" class="duaa-card end-card glass" hidden>
+          <div class="end-card-content">
+            <p class="eyebrow" id="endEyebrow">✨ End of set</p>
+            <h2 id="endTitle">You reached the end</h2>
+            <p id="endText" class="lead">You have reached the end of this adhkar set.</p>
+            <div class="end-actions">
+              <button class="primary" data-home>🏠 Home</button>
+            </div>
+          </div>
+        </article>
+
+        <div class="nav-row">
+          <button class="secondary" id="prevBtn">← Previous</button>
+          <button class="secondary" id="nextBtn">Next →</button>
+        </div>
+
+        <p class="swipe-hint">Swipe left/right, use side arrows, or press keyboard arrows.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
