@@ -456,3 +456,24 @@ button:disabled {
 @media (max-width: 520px) {
   .progress-stack { min-width: 98px; }
 }
+.arabic-quote {
+  font-size: clamp(2rem, 7vw, 3.4rem);
+  line-height: 1.8;
+  direction: rtl;
+  text-align: center;
+  margin: 0 0 1rem;
+}
+
+.quote-translation {
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.source {
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin-top: 0.75rem;
+}
