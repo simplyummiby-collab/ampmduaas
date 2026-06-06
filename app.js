@@ -41,6 +41,7 @@ function beginReader(mode) {
   currentList = getList(currentMode);
   currentIndex = 0;
   atEnd = false;
+
   renderCard();
   showScreen("reader");
 }
@@ -106,6 +107,7 @@ function renderCard() {
 
   document.getElementById("currentIndex").textContent = currentIndex + 1;
   document.getElementById("totalCount").textContent = currentList.length;
+
   document.getElementById("cardTime").textContent =
     currentMode === "Morning" ? "🌅 Morning Adhkar" : "🌙 Evening Adhkar";
 
@@ -171,14 +173,30 @@ function prevCard() {
   renderCard();
 }
 
+function goHome() {
+  showScreen("home");
+
+  if (location.hash) {
+    history.pushState({ screen: "home" }, "", window.location.pathname);
+  }
+}
+
+/* Home buttons go straight to reader */
 document.querySelectorAll("[data-start]").forEach(button => {
   button.addEventListener("click", () => {
+    history.pushState({ screen: "reader" }, "", "#reader");
     beginReader(button.dataset.start);
   });
 });
 
+/* In-app Home buttons */
 document.querySelectorAll("[data-home]").forEach(button => {
-  button.addEventListener("click", () => showScreen("home"));
+  button.addEventListener("click", goHome);
+});
+
+/* Browser back button */
+window.addEventListener("popstate", () => {
+  showScreen("home");
 });
 
 const nextBtn = document.getElementById("nextBtn");
@@ -201,7 +219,7 @@ document.addEventListener("keydown", event => {
 
   if (event.key === "ArrowRight") nextCard();
   if (event.key === "ArrowLeft") prevCard();
-  if (event.key === "Escape") showScreen("home");
+  if (event.key === "Escape") goHome();
 });
 
 if (reader) {
