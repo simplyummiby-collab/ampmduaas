@@ -1,4 +1,3 @@
-
 let currentMode = "Morning";
 let currentList = [];
 let currentIndex = 0;
@@ -12,14 +11,9 @@ const screens = {
   reader: document.getElementById("reader"),
 };
 
-const introCopy = {
-  Morning: "🌅 Begin your day with remembrance, asking Allah for protection, forgiveness, guidance, and good.",
-  Evening: "🌙 Close the day with remembrance, seeking Allah’s protection through the night and ending with your heart turned back to Him.",
-};
-
-
 function cleanFirstLine(text) {
   if (!text) return "";
+
   const firstLine = text
     .split("\n")
     .map(line => line.replace(/^\s*\d+\.\s*/, "").trim())
@@ -30,7 +24,6 @@ function cleanFirstLine(text) {
 }
 
 function getDisplayTitle(item, index) {
-  // Keep titles consistent and separate from the numbered English text.
   return `Duaa ${index + 1}`;
 }
 
@@ -43,21 +36,8 @@ function getList(mode) {
   return DUAA_DATA.filter(item => item.time.includes(mode));
 }
 
-function openIntro(mode) {
-  currentMode = mode;
-  currentList = getList(mode);
-  currentIndex = 0;
-  atEnd = false;
-
-  document.getElementById("intro-eyebrow").textContent = mode;
-  document.getElementById("intro-title").textContent = `${mode} Adhkar`;
-  document.getElementById("intro-text").textContent =
-    `${introCopy[mode]} This set currently has ${currentList.length} cards from your Coda export.`;
-
-  showScreen("intro");
-}
-
-function beginReader() {
+function beginReader(mode) {
+  currentMode = mode || currentMode;
   currentList = getList(currentMode);
   currentIndex = 0;
   atEnd = false;
@@ -69,7 +49,10 @@ function updateProgress() {
   const total = currentList.length || 1;
   const shown = atEnd ? total : Math.min(currentIndex + 1, total);
   const fill = document.getElementById("progressFill");
-  if (fill) fill.style.width = `${Math.round((shown / total) * 100)}%`;
+
+  if (fill) {
+    fill.style.width = `${Math.round((shown / total) * 100)}%`;
+  }
 }
 
 function setNavState() {
@@ -94,7 +77,9 @@ function showDuaaCard() {
 
 function showEndCard() {
   atEnd = true;
+
   const card = document.getElementById("endCard");
+
   document.getElementById("card").hidden = true;
   card.hidden = false;
 
@@ -103,6 +88,7 @@ function showEndCard() {
   document.getElementById("endEyebrow").textContent = `${currentMode} set complete`;
   document.getElementById("endTitle").textContent = `End of ${currentMode} Adhkar`;
   document.getElementById("endText").textContent = "You have reached the end of this set.";
+
   updateProgress();
   setNavState();
 }
@@ -110,11 +96,19 @@ function showEndCard() {
 function renderCard() {
   atEnd = false;
   showDuaaCard();
+
   const item = currentList[currentIndex];
+
+  if (!item) {
+    showEndCard();
+    return;
+  }
 
   document.getElementById("currentIndex").textContent = currentIndex + 1;
   document.getElementById("totalCount").textContent = currentList.length;
-  document.getElementById("cardTime").textContent = currentMode === "Morning" ? "🌅 Morning Adhkar" : "🌙 Evening Adhkar";
+  document.getElementById("cardTime").textContent =
+    currentMode === "Morning" ? "🌅 Morning Adhkar" : "🌙 Evening Adhkar";
+
   document.getElementById("cardTitle").textContent = getDisplayTitle(item, currentIndex);
   document.getElementById("cardSummary").textContent = item.summary || "A short reminder from this duaa";
   document.getElementById("cardSubtitle").textContent = cleanFirstLine(item.english);
@@ -124,6 +118,7 @@ function renderCard() {
 
   const transliterationWrap = document.getElementById("transliterationWrap");
   const transliterationText = document.getElementById("transliterationText");
+
   if (item.transliteration && item.transliteration.trim()) {
     transliterationWrap.hidden = false;
     transliterationText.textContent = item.transliteration;
@@ -134,6 +129,7 @@ function renderCard() {
 
   const virtueBox = document.getElementById("virtueBox");
   const virtueText = document.getElementById("virtueText");
+
   if (item.virtues && item.virtues.trim()) {
     virtueBox.style.display = "block";
     virtueText.textContent = item.virtues;
@@ -143,63 +139,84 @@ function renderCard() {
 
   const content = document.querySelector("#card .card-content");
   if (content) content.scrollTop = 0;
+
   updateProgress();
   setNavState();
 }
 
 function nextCard() {
   if (!currentList.length || atEnd) return;
+
   if (currentIndex >= currentList.length - 1) {
     showEndCard();
     return;
   }
+
   currentIndex += 1;
   renderCard();
 }
 
 function prevCard() {
   if (!currentList.length) return;
+
   if (atEnd) {
     currentIndex = currentList.length - 1;
     renderCard();
     return;
   }
+
   if (currentIndex <= 0) return;
+
   currentIndex -= 1;
   renderCard();
 }
 
 document.querySelectorAll("[data-start]").forEach(button => {
-  button.addEventListener("click", () => openIntro(button.dataset.start));
+  button.addEventListener("click", () => {
+    beginReader(button.dataset.start);
+  });
 });
 
 document.querySelectorAll("[data-home]").forEach(button => {
   button.addEventListener("click", () => showScreen("home"));
 });
 
-document.getElementById("beginBtn").addEventListener("click", beginReader);
-document.getElementById("nextBtn").addEventListener("click", nextCard);
-document.getElementById("prevBtn").addEventListener("click", prevCard);
-document.getElementById("topNextBtn").addEventListener("click", nextCard);
-document.getElementById("topPrevBtn").addEventListener("click", prevCard);
-document.getElementById("sideNextBtn").addEventListener("click", nextCard);
-document.getElementById("sidePrevBtn").addEventListener("click", prevCard);
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+const topNextBtn = document.getElementById("topNextBtn");
+const topPrevBtn = document.getElementById("topPrevBtn");
+const sideNextBtn = document.getElementById("sideNextBtn");
+const sidePrevBtn = document.getElementById("sidePrevBtn");
+const reader = document.getElementById("reader");
+
+if (nextBtn) nextBtn.addEventListener("click", nextCard);
+if (prevBtn) prevBtn.addEventListener("click", prevCard);
+if (topNextBtn) topNextBtn.addEventListener("click", nextCard);
+if (topPrevBtn) topPrevBtn.addEventListener("click", prevCard);
+if (sideNextBtn) sideNextBtn.addEventListener("click", nextCard);
+if (sidePrevBtn) sidePrevBtn.addEventListener("click", prevCard);
 
 document.addEventListener("keydown", event => {
   if (!screens.reader.classList.contains("active")) return;
+
   if (event.key === "ArrowRight") nextCard();
   if (event.key === "ArrowLeft") prevCard();
   if (event.key === "Escape") showScreen("home");
 });
 
-document.getElementById("reader").addEventListener("touchstart", event => {
-  startX = event.changedTouches[0].screenX;
-}, { passive: true });
+if (reader) {
+  reader.addEventListener("touchstart", event => {
+    startX = event.changedTouches[0].screenX;
+  }, { passive: true });
 
-document.getElementById("reader").addEventListener("touchend", event => {
-  endX = event.changedTouches[0].screenX;
-  const diff = endX - startX;
-  if (Math.abs(diff) < 45) return;
-  if (diff < 0) nextCard();
-  else prevCard();
-}, { passive: true });
+  reader.addEventListener("touchend", event => {
+    endX = event.changedTouches[0].screenX;
+
+    const diff = endX - startX;
+
+    if (Math.abs(diff) < 45) return;
+
+    if (diff < 0) nextCard();
+    else prevCard();
+  }, { passive: true });
+}
