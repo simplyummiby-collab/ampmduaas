@@ -1,76 +1,100 @@
 # Duaa Reader App
 
-A first-version swipe-card reader for Morning and Evening adhkar using your exported Coda CSV data.
+A calm, card-based reader for authentic Morning and Evening adhkar.
 
-## How to use
+Read one duaa at a time with Arabic, transliteration, meaning, and notes in a simple, distraction-free experience designed for daily remembrance.
 
-Open `index.html` in a browser.
+## Live App
+
+https://ampmduaas.ummiby.com
+
+## Features
+
+* Morning adhkar collection
+* Evening adhkar collection
+* One-card-at-a-time reading experience
+* Arabic text
+* Transliteration (when available)
+* English meaning
+* Virtue and benefit notes (when available)
+* Progress indicator and progress bar
+* Swipe navigation on touch devices
+* Keyboard navigation
+* Desktop side-arrow navigation
+* End-of-set completion screen
+* Responsive design for desktop, tablet, and mobile
 
 ## Files
 
-- `index.html` — app structure
-- `styles.css` — pretty backgrounds and card design
-- `app.js` — navigation and swipe behavior
-- `data.js` — duaa data from your CSV
+* `index.html` — app structure
+* `styles.css` — design and layout
+* `app.js` — navigation and reader functionality
+* `data.js` — adhkar data
 
-## Current scope
+## Current Scope
 
-This version is intentionally simple:
-- Home page
-- Morning and Evening sections
-- Intro/splash page
-- Swipe cards
-- Arabic, English, count, and virtues when available
-- No tracking yet
+This version focuses on reading and review.
 
-## Later upgrades
+Included:
 
-- Done button per duaa
-- Daily reset
-- Progress tracking
-- Favorites
-- Font size controls
-- Installable mobile app/PWA
+* Morning adhkar
+* Evening adhkar
+* Arabic text
+* Transliteration
+* English meaning
+* Progress tracking within the current session
 
+Not yet included:
 
-Version 4: Fixed end-of-set card so it only appears after advancing past the final duaa.
+* Favorites
+* Saved progress
+* Search
+* Font size controls
+* User accounts
+* Offline support
 
+## Planned Improvements
 
-Version 5 notes:
-- Removed the slide/bounce animation when moving between cards.
-- Card changes now feel steady and fixed in place.
-- Kept keyboard arrow navigation, side arrows, and end-of-set behavior.
+* Favorites
+* Search
+* Font size controls
+* Daily completion tracking
+* Offline support
+* Installable mobile app (PWA)
 
-## Version 6
+## Changelog
 
-Morning and evening Arabic/English text has been broken into numbered phrase lines where available.
+### Initial Release
 
+* Created swipe-card reader for Morning and Evening adhkar.
+* Added Arabic text, English meaning, repetition counts, and virtue notes.
 
-Version 7 notes:
-- Reworked the card header so long generated titles do not get cut off.
-- Uses a clean Duaa number/title plus a subtitle preview instead of showing chopped titles with ellipses.
-- Keeps the card size consistent and preserves the inner scroll area.
+### Reader Improvements
 
+* Improved navigation and card layout.
+* Added end-of-set screen.
+* Simplified card titles and previews.
+* Improved mobile and desktop usability.
 
-Version 8 notes:
-- Card titles are now consistently shown as Duaa 1, Duaa 2, etc.
-- Numbered English lines stay in the body only, not in the title/header.
-- The subtitle preview is cleaned so it does not start with a line number.
+### Transliteration Support
 
+* Added optional transliteration field.
+* Displays automatically when available.
+* Hidden when no transliteration is provided.
 
-Version 9 changes:
-- Restored ellipses on the preview line so it clearly reads as a partial title/preview.
-- Removed the Back to last duaa button from the end screen.
+### Progress & Navigation Updates
 
+* Added progress counter and progress bar.
+* Improved card summaries.
+* Added keyboard, touch, and desktop navigation enhancements.
 
-Version 10 notes
-- Added broader soft sage/lilac/cream colors.
-- Added light emoji/icon accents.
-- Added support for an optional `transliteration` field in data.js. If a duaa has transliteration, the app will show a Transliteration section between Arabic and Meaning. If it is blank/missing, that section stays hidden.
-- Titles remain consistent as Duaa 1, Duaa 2, etc., with a partial preview line underneath.
+### Homepage Refresh
 
+* Removed the intro screen from the reading flow.
+* Morning and Evening buttons now open directly into the reader.
+* Refined homepage design and Quran reminder section.
+* Improved browser navigation behavior.
 
-Version 11 notes
-- Added transliteration text for the current Morning/Evening duaa cards.
-- Transliteration is stored as a separate field, so Arabic and English remain unchanged.
-- Transliteration follows a simple readable style intended for family use; review/correction can be done later without changing the app layout.
+---
+
+Built as part of the Ummiby collection of Islamic tools and resources.
