@@ -456,24 +456,31 @@ button:disabled {
 @media (max-width: 520px) {
   .progress-stack { min-width: 98px; }
 }
-.arabic-quote {
-  font-size: clamp(2rem, 7vw, 3.4rem);
-  line-height: 1.8;
+.home-ayah-box,
+.home-ayah-box p {
+  text-align: center;
+}
+
+.home-ayah-box .arabic-quote {
+  display: block;
+  width: 100%;
+  max-width: none;
+  white-space: nowrap;
+  text-align: center;
   direction: rtl;
-  text-align: center;
-  margin: 0 0 1rem;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  line-height: 1.7;
+  margin: 0 auto 1rem;
 }
 
-.quote-translation {
+.home-ayah-box .quote-translation {
   text-align: center;
-  font-size: 1.05rem;
   line-height: 1.6;
-  margin: 0.5rem 0;
+  margin: 0.5rem auto;
 }
 
-.source {
+.home-ayah-box .source {
   text-align: center;
-  font-size: 0.9rem;
+  margin: 0.75rem auto 0;
   opacity: 0.75;
-  margin-top: 0.75rem;
 }
