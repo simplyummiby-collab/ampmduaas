@@ -112,7 +112,8 @@ function renderCard() {
     currentMode === "Morning" ? "🌅 Morning Adhkar" : "🌙 Evening Adhkar";
 
   document.getElementById("cardTitle").textContent = getDisplayTitle(item, currentIndex);
-  document.getElementById("cardSummary").textContent = item.summary || "A short reminder from this duaa";
+  document.getElementById("cardSummary").textContent =
+  item.summary || cleanFirstLine(item.english);
   document.getElementById("cardSubtitle").textContent = cleanFirstLine(item.english);
   document.getElementById("countBadge").textContent = `🔁 Number of times: ${item.count || "Not specified"}`;
   document.getElementById("arabicText").textContent = item.arabic || "Arabic not added yet.";
