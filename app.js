@@ -134,11 +134,12 @@ function renderCard() {
   const virtueText = document.getElementById("virtueText");
 
   if (item.virtues && item.virtues.trim()) {
-    virtueBox.style.display = "block";
-    virtueText.textContent = item.virtues;
-  } else {
-    virtueBox.style.display = "none";
-  }
+  virtueBox.style.display = "block";
+  virtueText.textContent = item.virtues;
+} else {
+  virtueBox.style.display = "none";
+  virtueText.textContent = "";
+}
 const sourceBox = document.getElementById("sourceBox");
 const sourceText = document.getElementById("sourceText");
 
