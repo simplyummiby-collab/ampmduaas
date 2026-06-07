@@ -1,4 +1,4 @@
-# Morning & Eveniing Duaas Reader App
+# Morning & Evening Duaas Reader App
 
 A calm, card-based reader for authentic Morning and Evening adhkar.
 
