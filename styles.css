@@ -147,7 +147,7 @@ h1 {
 }
 
 /* Virtue box inside reader */
-.virtue-box {
+.virtue-box, .source-box {
   margin: 18px 0;
   border-radius: 24px;
   background: rgba(255,255,255,.55);
@@ -155,12 +155,12 @@ h1 {
   text-align: left;
 }
 
-.virtue-box h3 {
+.virtue-box h3, .source-box he {
   font-size: 1rem;
   margin-bottom: 8px;
 }
 
-.virtue-box p {
+.virtue-box p, .source-box p {
   color: var(--muted);
   line-height: 1.5;
   margin-bottom: 0;
