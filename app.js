@@ -139,7 +139,16 @@ function renderCard() {
   } else {
     virtueBox.style.display = "none";
   }
+const sourceBox = document.getElementById("sourceBox");
+const sourceText = document.getElementById("sourceText");
 
+if (item.source && item.source.trim()) {
+  sourceBox.style.display = "block";
+  sourceText.textContent = item.source;
+} else {
+  sourceBox.style.display = "none";
+  sourceText.textContent = "";
+}
   const content = document.querySelector("#card .card-content");
   if (content) content.scrollTop = 0;
 
